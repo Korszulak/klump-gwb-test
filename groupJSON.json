@@ -1,0 +1,46 @@
+{
+    "members": [
+        {
+            "FirstName": "Ali",
+            "LastName": "Kazmi",
+            "PreferredName": "Ali",
+            "TeamName": "Great White Buffalo",
+            "SeatLocation": "10-1",
+            "Roles": [
+                "Developer"
+            ]
+        },
+        {
+            "FirstName": "John",
+            "LastName": "Laschober",
+            "PreferredName": "John",
+            "TeamName": "Great White Buffalos",
+            "SeatLocation": "9-2",
+            "Roles": [
+                "Developer",
+                "Product Owner"
+            ]
+        },
+        {
+            "firstName": "Ahmad",
+            "lastName": "Dahshan",
+            "preferredName": "Ahmad",
+            "teamName": "Great White Buffalo",
+            "seatLocation": "9-1",
+            "roles": [
+                "Team member",
+                "Product Architect"
+            ]
+        },
+        {
+            "FirstName": "Cris",
+            "LastName": "Serrano",
+            "PreferredName": "Cris",
+            "TeamName": "Great White Buffalos",
+            "SeatLocation": "11-1",
+            "Roles": [
+                "Developer"
+            ]
+        }
+    ]
+}
