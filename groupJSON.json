@@ -1,3 +1,4 @@
+
 {
     "members": [
         {
@@ -22,12 +23,12 @@
             ]
         },
         {
-            "firstName": "Ahmad",
-            "lastName": "Dahshan",
-            "preferredName": "Ahmad",
-            "teamName": "Great White Buffalo",
-            "seatLocation": "9-1",
-            "roles": [
+            "FirstName": "Ahmad",
+            "LastName": "Dahshan",
+            "PreferredName": "Ahmad",
+            "TeamName": "Great White Buffalo",
+            "SeatLocation": "9-1",
+            "Roles": [
                 "Team member",
                 "Product Architect"
             ]
