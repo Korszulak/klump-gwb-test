@@ -1,5 +1,3 @@
-# Team Information Service - Test
+# Team Information Service
 
-This is the Team Information Service test product for The Great White Buffalos
-
-http://klump-gwb-test.azurewebsites.net/
+This is the Team Information Service product for The Great White Buffalos

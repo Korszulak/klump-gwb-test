@@ -1,6 +1,5 @@
-var http = require('http');
-
 var request = require('request'); // Imports libraries
+var http = require('http');
 var fs = require('fs');
 
 // Define URLs here
@@ -10,72 +9,60 @@ var allJSON = [];
 
 var concattedJSON;
 var finalJSON = "no";
-var done = false;
 
-var indexStack = [];
-
-for (i = 0; i < allURLS.length; i++)
+function UpdateJSON(createdResponse)
 {
-	indexStack.push(i);
-	request(allURLS[i], function (error, response, body) 
+	for (i = 0; i < allURLS.length; i++) // Initiates on server launch
 	{
-		console.log(response.statusCode);
-		if (!error && response.statusCode == 200) 
+		request(allURLS[i], function (error, response, body)
 		{
-			var iterator = indexStack[indexStack.length - 1];
-			indexStack.pop();
-			var importedJSON = JSON.parse(body);
-			allJSON.push(importedJSON);
-			var outputString = JSON.stringify(importedJSON, null, 4);
-			fs.writeFile("member" + iterator + ".json", outputString, 'utf-8', function (err)  // File writer for saving a json file, not done
+			if (!error && response.statusCode == 200) 
 			{
-				if (err) 
+				var importedJSON = JSON.parse(body);
+				allJSON.push(importedJSON);
+				//console.log(allJSON.length);
+				if (allJSON.length == allURLS.length)
 				{
-					return console.log(err);
-				}
-				else
-				{
-					if (indexStack.length == 0)
+					var concattedJSON = "";
+					concattedJSON = '{"members":[';
+					for (j = 0; j < allURLS.length; j++)
 					{
-						var concattedJSON = "";
-						concattedJSON = '{"members":[';
-						for (j = 0; j < allJSON.length; j++)
+						concattedJSON += JSON.stringify(allJSON[j]);
+						if (j != allURLS.length - 1)
 						{
-							concattedJSON += JSON.stringify(allJSON[j]);
-							if (j != allURLS.length - 1) 
-							{
-								concattedJSON += ',';
-							}
+							concattedJSON += ',';
 						}
-						concattedJSON += ']}';
-						fs.writeFile("groupJSON.json", concattedJSON, 'utf-8', function (err)  // File writer for saving a json file, not done
-						{
-							if (err) 
-							{
-								return console.log(err);
-							}
-						});
 					}
+					concattedJSON += ']}';
+					//console.log(concattedJSON);
+					finalJSON = JSON.parse(concattedJSON);
+					//console.log(finalJSON);
+					createdResponse.write(JSON.stringify(finalJSON, null, 4));
+					createdResponse.end(); // End of http stream, can no longer update website
+					
+					/*
+					var stringFinal = JSON.stringify(finalJSON, null, 4);
+					fs.writeFile("groupJSON.json", stringFinal,'utf-8', function(err)  // File writer for saving a json file, not done
+					{
+						if(err) 
+						{
+							return console.log(err);
+						}
+					});
+					*/
+					
 				}
-			});
-
-		}
-	});
+			}
+		});
+	} 
 }
 
-var server = http.createServer(function (request, response)  // On user connect
+var server = http.createServer(function(request, response)  // On user connect
 {
-    response.writeHead(200, { "Content-Type": "text/plain" });
-    try
-    {
-        var importedJSON = JSON.parse(fs.readFileSync('groupJSON.json', 'utf8'));    // Reading from input
-        response.write(JSON.stringify(importedJSON, null, 4));
-    }
-    catch (err)
-    {
-        response.write("Something went wrong... " + err);
-    }
-	response.end("");
+	UpdateJSON(response); // Send respond to function because it's asynchronous
+    response.writeHead(200, {"Content-Type": "text/plain"}); 
+
+	//var importedJSON = JSON.parse(fs.readFileSync('groupJSON.json', 'utf8'));    // Reading from input
 });
 
 var port = process.env.PORT || 80;
