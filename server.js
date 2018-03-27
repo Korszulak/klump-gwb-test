@@ -71,7 +71,7 @@ var liveHTML = '<head>\
 		{\
 			try\
 			{\
-				var data = getJSON("https://jsonmergingtest.azurewebsites.net/groupJSON.json");\
+				var data = getJSON("https://klump-gwb-test.azurewebsites.net/groupJSON.json");\
 				data = JSON.parse(data);\
 				for (i = 0; i < 4; i++)\
 				{	\
