@@ -1,10 +1,10 @@
 {
-    "FirstName": "Karol",
-    "LastName": "Orszulak",
-    "PreferredName": "Karl",
+    "FirstName": "Cris",
+    "LastName": "Serrano",
+    "PreferredName": "Cris",
     "TeamName": "Great White Buffalos",
-    "SeatLocation": "2-10",
+    "SeatLocation": "11-1",
     "Roles": [
-        "Team Member"
+        "Developer"
     ]
 }

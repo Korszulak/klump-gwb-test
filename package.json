@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/johnlaschober/JSON-Merge-Test#readme",
   "dependencies": {
+    "merge-json": "0.1.0-b.3",
     "request": "^2.85.0",
     "request-promise": "^4.2.2"
   }

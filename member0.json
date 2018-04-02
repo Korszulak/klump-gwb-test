@@ -1,11 +1,10 @@
 {
-    "FirstName": "John",
-    "LastName": "Laschober",
-    "PreferredName": "John",
+    "FirstName": "Nicolas",
+    "LastName": "Soto",
+    "PreferredName": "Nick",
     "TeamName": "Great White Buffalos",
-    "SeatLocation": "9-2",
+    "SeatLocation": "8-1",
     "Roles": [
-        "Team Member",
-        "Product Owner"
+        "Developer"
     ]
 }
