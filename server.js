@@ -31,7 +31,7 @@ function concatOtherGroupsJson(url)
 concatOtherGroupsJson("http://gwb-json-info.azurewebsites.net/");
 concatOtherGroupsJson("https://flamingos.azurewebsites.net/json");
 
-
+/*
 var liveHTML = '<head>\
 -        <meta charset="UTF-8">\
 -        <title>PROJECT: Klump</title>\
@@ -82,6 +82,7 @@ var liveHTML = '<head>\
 -		<p id="4"></p>\
 -		<p id="5"></p>\
 -	</body>';
+*/
 
 var server = http.createServer(function (request, response)  // On user connect
 {
@@ -102,7 +103,7 @@ var server = http.createServer(function (request, response)  // On user connect
 			response.write("Last updated: " + lastUpdated);
 		}
 		catch (err){}
-	    	response.write(liveHTML);
+	    	//response.write(liveHTML);
 		response.end();
     }
     catch (err)
