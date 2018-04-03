@@ -31,59 +31,6 @@ function concatOtherGroupsJson(url)
 concatOtherGroupsJson("http://gwb-json-info.azurewebsites.net/");
 concatOtherGroupsJson("https://flamingos.azurewebsites.net/json");
 
-/*
-var liveHTML = '<head>\
--        <meta charset="UTF-8">\
--        <title>PROJECT: Klump</title>\
--        <script>\
--		function load()\
--		{\
--			try\
--			{\
--				var data = getJSON("https://jsonmergingtest.azurewebsites.net/groupJSON.json");\
--				data = JSON.parse(data);\
--				for (i = 0; i < 4; i++)\
--				{	\
--					document.getElementById(i).innerHTML = "First Name: " + data.members[i].FirstName + "<br>";\
--					document.getElementById(i).innerHTML += "Last Name: " + data.members[i].LastName + "<br>";\
--					document.getElementById(i).innerHTML += "Preferred Name: " + data.members[i].PreferredName + "<br>";\
--					document.getElementById(i).innerHTML += "Team Name: " + data.members[i].TeamName + "<br>";\
--					document.getElementById(i).innerHTML += "Seat Location: " + data.members[i].SeatLocation + "<br>";\
--					document.getElementById(i).innerHTML += "Roles: " + data.members[i].Roles + "<br>";\
--				}\
--				console.log(data.members);\
--			}\
--			catch (err)\
--			{\
--				console.log("groupJSON.json could not be accessed. " + err);\
--			}\
--			 function getJSON(url) \
--			 {\
--				var resp ;\
--				var xmlHttp ;\
--				resp  = "" ;\
--				xmlHttp = new XMLHttpRequest();\
--				if(xmlHttp != null)\
--				{\
--					xmlHttp.open( "GET", url, false );\
--					xmlHttp.send( null );\
--					resp = xmlHttp.responseText;\
--				}\
--				return resp ;\
--			}\
--		}\
--		</script>\
--	</head>\
--	<body onload="load()">\
--		<p id="0"></p>\
--		<p id="1"></p>\
--		<p id="2"></p>\
--		<p id="3"></p>\
--		<p id="4"></p>\
--		<p id="5"></p>\
--	</body>';
-*/
-
 var server = http.createServer(function (request, response)  // On user connect
 {
     //response.writeHead(200, { "Content-Type": "text/plain" });
@@ -103,7 +50,6 @@ var server = http.createServer(function (request, response)  // On user connect
 			response.write("Last updated: " + lastUpdated);
 		}
 		catch (err){}
-	    	//response.write(liveHTML);
 		response.end();
     }
     catch (err)
