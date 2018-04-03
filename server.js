@@ -27,69 +27,8 @@ function concatOtherGroupsJson(url)
 	});
 }
 
-function concatGroupJson()
-{	
-	for (i = 0; i < allURLS.length; i++)
-	{
-		indexStack.push(i);
-		request(allURLS[i], function (error, response, body) 
-		{
-			console.log(response.statusCode);
-			if (!error && response.statusCode == 200) 
-			{
-				var iterator = indexStack[indexStack.length - 1];
-				indexStack.pop();
-				var importedJSON = JSON.parse(body);
-				allJSON.push(importedJSON);
-				var outputString = JSON.stringify(importedJSON, null, 4);
-				fs.writeFile("member" + iterator + ".json", outputString, 'utf-8', function (err)  // File writer for saving a json file, not done
-				{
-					if (err) 
-					{
-						return console.log(err);
-					}
-					else
-					{
-						if (indexStack.length == 0)
-						{
-							var concattedJSON = "";
-							concattedJSON = '{"members":[';
-							for (j = 0; j < allJSON.length; j++)
-							{
-								concattedJSON += JSON.stringify(allJSON[j]);
-								if (j != allURLS.length - 1) 
-								{
-									concattedJSON += ',';
-								}
-							}
-							concattedJSON += ']}';
-							groupJSONs.push(JSON.parse(concattedJSON));
-							fs.writeFile("groupJSON.json", concattedJSON, 'utf-8', function (err)  // File writer for saving a json file, not done
-							{
-								if (err) 
-								{
-									return console.log(err);
-								}
-							});
-						}
-					}
-				});
 
-			}
-		});
-	}
-	fs.writeFile("lastUpdated.txt", Date(), 'utf-8', function (err)
-	{
-		if (err)
-		{
-			return console.log(err);
-		}
-	});
-	setTimeout(concatGroupJson, 1000 * 60 * 30); // 30 minute refresh in milliseconds
-}
-
-
-concatGroupJson();
+concatOtherGroupsJson("http://gwb-json-info.azurewebsites.net/");
 concatOtherGroupsJson("https://flamingos.azurewebsites.net/json");
 
 var server = http.createServer(function (request, response)  // On user connect
@@ -103,7 +42,7 @@ var server = http.createServer(function (request, response)  // On user connect
     {
         //var importedJSON = JSON.parse(fs.readFileSync('groupJSON.json', 'utf8'));    // Reading from input
 		//console.log(JSON.parse(fs.readFileSync('groupJSON.json', 'utf8')));
-        response.write(JSON.stringify(combined, null, 4));
+        response.write(JSON.stringify(combined));
 		try
 		{
 			var lastUpdated = fs.readFileSync('lastUpdated.txt', 'utf8');
