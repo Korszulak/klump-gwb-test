@@ -95,7 +95,7 @@ var server = http.createServer(function (request, response)  // On user connect
     {
         //var importedJSON = JSON.parse(fs.readFileSync('groupJSON.json', 'utf8'));    // Reading from input
 		//console.log(JSON.parse(fs.readFileSync('groupJSON.json', 'utf8')));
-       
+        response.write(JSON.stringify(combined));
 		try
 		{
 			var lastUpdated = fs.readFileSync('lastUpdated.txt', 'utf8');
