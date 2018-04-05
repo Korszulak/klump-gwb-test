@@ -27,9 +27,20 @@ function concatOtherGroupsJson(url)
 	});
 }
 
-
-concatOtherGroupsJson("http://gwb-json-info.azurewebsites.net/");
-concatOtherGroupsJson("https://flamingos.azurewebsites.net/json");
+function concatGroupJsons()
+{
+	concatOtherGroupsJson("http://gwb-json-info.azurewebsites.net/");
+	concatOtherGroupsJson("https://flamingos.azurewebsites.net/json");
+	fs.writeFile("lastUpdated.txt", Date(), 'utf-8', function (err) 
+	{ 
+		if (err) 
+		{ 
+			return console.log(err); 
+		} 
+	}); 
+	setTimeout(concatGroupJsons, 1000 * 60 * 30); // 30 minute refresh in milliseconds 
+}
+concatGroupJsons();
 
 var liveHTML = '<head>\
         <meta charset="UTF-8">\
@@ -86,7 +97,10 @@ var server = http.createServer(function (request, response)  // On user connect
     //response.writeHead(200, { "Content-Type": "text/plain" });
 	
 	//var combined = Object.assign(groupJSONs[0], groupJSONs[1]);
-	var combined = mergeJSON.merge(groupJSONs[0], groupJSONs[1]);
+	try
+	{
+		var combined = mergeJSON.merge(groupJSONs[0], groupJSONs[1]);
+	} catch (err) {}
 	
     try
     {
