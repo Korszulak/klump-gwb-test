@@ -2,6 +2,12 @@ var http = require('http');
 var mergeJSON = require("merge-json");
 var request = require('request'); // Imports libraries
 var fs = require('fs');
+var express = require('express');
+var app = express();
+
+express.static("C:\Users\robob\Desktop\klump-gwb-test");
+app.use(express.static('public'));
+app.listen(5000);
 
 // Define URLs here
 var allURLS = ["https://johnlaschobersoftwareengineering.azurewebsites.net/myInfo.json", "https://softwareengineeringapp.azurewebsites.net/my-information.json", "https://korszulak-static.azurewebsites.net/myInfo.json", "http://csoftware.azurewebsites.net/groupinfo.json", "https://cpsc440.azurewebsites.net/myInfo.json", "https://alisp18.azurewebsites.net/myinfo.json"];
@@ -42,13 +48,26 @@ function concatGroupJsons()
 }
 concatGroupJsons();
 
-var liveHTML = '<head>\
+
+
+var server = http.createServer(function (request, response)  // On user connect
+{
+    //response.writeHead(200, { "Content-Type": "text/plain" });
+	
+	//var combined = Object.assign(groupJSONs[0], groupJSONs[1]);
+	try
+	{
+		var combined = mergeJSON.merge(groupJSONs[0], groupJSONs[1]);
+	} catch (err) {}
+	
+	var liveHTML = '<head>\
         <meta charset="UTF-8">\
         <title>PROJECT: Klump</title>\
         <script>\
 		function load()\
 		{\
-			var data = getJSON("http://gwb-json-info.azurewebsites.net/");\
+			var data = getJSON("https://gwb-class-info.azurewebsites.net/");\
+			console.log(data);\
 			data = JSON.parse(data);\
 			var storedPosition = "";\
 			for (i = 0; i < 6; i++)\
@@ -91,18 +110,11 @@ var liveHTML = '<head>\
 		<p id="4"></p>\
 		<p id="5"></p>\
 	</body>';
-
-var server = http.createServer(function (request, response)  // On user connect
-{
-    //response.writeHead(200, { "Content-Type": "text/plain" });
 	
-	//var combined = Object.assign(groupJSONs[0], groupJSONs[1]);
+	
+	//console.log(liveHTML);
+	//console.log(JSON.parse(testData));
 	try
-	{
-		var combined = mergeJSON.merge(groupJSONs[0], groupJSONs[1]);
-	} catch (err) {}
-	
-    try
     {
         //var importedJSON = JSON.parse(fs.readFileSync('groupJSON.json', 'utf8'));    // Reading from input
 		//console.log(JSON.parse(fs.readFileSync('groupJSON.json', 'utf8')));
