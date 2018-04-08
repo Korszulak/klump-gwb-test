@@ -65,7 +65,15 @@
 		
 		if (foundIndex != null)
 		{
-			document.getElementById("FirstName").innerHTML = "First Name: " + data.members[foundIndex].FirstName;
+			if (data.members[foundIndex].FirstName == null)
+			{
+				console.log("This person's name is undefined. Loading preferred name instead.");
+				document.getElementById("FirstName").innerHTML = "First Name: " + data.members[foundIndex].PreferredName;
+			}
+			else
+			{
+				document.getElementById("FirstName").innerHTML = "First Name: " + data.members[foundIndex].FirstName;
+			}
 			document.getElementById("LastName").innerHTML = "Last Name: " + data.members[foundIndex].LastName;
 			document.getElementById("PrefName").innerHTML = "Preferred Name: " + data.members[foundIndex].PreferredName;
 			document.getElementById("TeamName").innerHTML = "Team Name: " + data.members[foundIndex].TeamName;
