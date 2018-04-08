@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>classJSON</title>
+  <script>
+	var data;
+	function load()
+	{
+	    data = getJSON("https://gwb-class-info.azurewebsites.net/");
+		data = JSON.parse(data);
+		data = JSON.stringify(data, null, 4);
+		document.getElementById("myText").innerHTML = data;
+		function getJSON(url) 
+		{
+			var resp ;
+			var xmlHttp ;
+			resp = "" ;
+			xmlHttp = new XMLHttpRequest();
+			if(xmlHttp != null)
+			{
+				xmlHttp.open( "GET", url, false );
+				xmlHttp.send( null );
+				resp = xmlHttp.responseText;
+			}
+			return resp ;
+		}
+	}
+	</script>
+  </head>
+  <body onload="load()">
+	<span id="myText"></span>
+  </body>
+</html>
