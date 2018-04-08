@@ -22,18 +22,15 @@
 		data = JSON.parse(data);
 		var storedPosition = "";
 	
-		
 		for (i = 0; i < Object.keys(data.members).length; i++)
 		{
-			console.log(data.members[i].FirstName);
-			console.log(data.members[i].SeatLocation);
 			try
 			{
 				document.getElementById(data.members[i].SeatLocation).className = "seat";
 			}
 			catch (err)
 			{
-				console.log("This person didn't follow the class format for SeatLocation.");
+				console.log(data.members[i].FirstName + " " + data.members[i].LastName + " didn't follow the class format for SeatLocation.\nThe seat location " + data.members[i].SeatLocation + " does not exist.");
 			}
 		}
 		
@@ -62,7 +59,6 @@
 			if (data.members[i].SeatLocation == passedID)
 			{
 				foundIndex = i;
-				console.log(data.members[i].FirstName);
 				break;
 			}
 		}
@@ -74,9 +70,10 @@
 			document.getElementById("PrefName").innerHTML = "Preferred Name: " + data.members[foundIndex].PreferredName;
 			document.getElementById("TeamName").innerHTML = "Team Name: " + data.members[foundIndex].TeamName;
 			document.getElementById("SeatLocation").innerHTML = "Seat Location: " + data.members[foundIndex].SeatLocation;
+			document.getElementById("Roles").innerHTML = "Roles: " + data.members[foundIndex].Roles[0];
 			try
 			{
-				document.getElementById("Roles").innerHTML = "Roles: " + data.members[foundIndex].Roles[0];
+				
 				for (i = 1; i < Object.keys(data.members[foundIndex].Roles).length; i++)
 				{
 					document.getElementById("Roles").innerHTML += ", " + data.members[foundIndex].Roles[i];
@@ -84,12 +81,12 @@
 			}
 			catch (err)
 			{
-				console.log("Student did not have any roles listed.");
+				console.log(data.members[i].FirstName + " " + data.members[i].LastName + " did not have any roles listed.");
 			}
 		}
 		else
 		{
-			console.log("Did not find any information for whoever sits here.");
+			console.log("Did not find any information for whoever sits at location " + passedID + ".");
 		}
 	}
 	
