@@ -81,10 +81,16 @@
 			document.getElementById("Roles").innerHTML = "Roles: " + data.members[foundIndex].Roles[0];
 			try
 			{
-				
 				for (i = 1; i < Object.keys(data.members[foundIndex].Roles).length; i++)
 				{
-					document.getElementById("Roles").innerHTML += ", " + data.members[foundIndex].Roles[i];
+					if (data.members[foundIndex].Roles[i].length != 1)
+					{
+						document.getElementById("Roles").innerHTML += ", " + data.members[foundIndex].Roles[i];
+					}
+					else // This is here because the Lewis Honey Badgers stored their roles as an array...
+					{
+						document.getElementById("Roles").innerHTML += data.members[foundIndex].Roles[i];
+					}
 				}
 			}
 			catch (err)
